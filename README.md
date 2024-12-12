@@ -21,37 +21,13 @@ Species A = -1
 Species B = -2 (immune)
 Infected = 1
 
-# To-do (from Fri 6/12)
+# To-do (from Wed 11/12)
 
- - Research the time scale for disease spreading (should one time step = 1 yr?) (Brian, Marike)
-
- - Description of mechanisms of disease-spreading (for report/poster) (Megan)
-
- - Should we take age into account (when disease-spreading? older trees have a larger range of infection) (Zishan, is this possible?)
-
- - Should we implement a probability of tree dying (trees don't die w 100% prob after infectionTime)
-
- - Batch simulations (new main for running batches) for ensemble average of infection and wood outcome (Herman)
-
- - Long run for time average
- 
- - Need to decide which forest configurations/initial conditions we want to simulate
-
- - Run simulations to generate graphs/images for poster draft 10/12
-
- - Write draft text of results/conclusions/discussion for poster (Marcus)
-
- - Graph of ratio species A / species B for different forests?
-
- - Work on report/ research (Everyone)
-
-
-
-# To ask Daniel on Wednesday:
-
-## How are trees regrown? 
-Assume naturally regrown (not planted), but how should we model this?
-Trees regrown with a probability for each species or regrown based on the surrounding trees' species?
+ - Phase diagram of most profitable forests for different disease characteristics (after 70 yrs) (Marcus, Brian)
+ - Graph for three forests (batch average?) - wood outcome, infection/course of disease (Herman)
+ - Logistic growth (Marike)
+ - Images of lattice at shorter time interval to get a better sequence 
+ - Layout poster (Megan)
 
 
 

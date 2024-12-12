@@ -8,7 +8,7 @@ Created on Tue Dec 10 09:14:50 2024
 import numpy as np
 from scipy.signal import convolve2d
 
-def GrowTrees(forest, p_prolif1, p_prolif2):
+def ConvGrowTrees(forest, p_prolif1, p_prolif2):
         
     def p_matrix(forest, index, p_prolif):
     

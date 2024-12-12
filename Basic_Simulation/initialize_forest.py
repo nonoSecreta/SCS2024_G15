@@ -1,5 +1,30 @@
 import numpy as np
 
+def generate_forest(index, forest_size):
+    
+    initial_forest_value = [-1, -2, -1] # The initial value of the forest before added patches or random placements
+    
+    use_patches =         [False, True, False]
+    patch_offset_x =      [0,     0,     0]
+    patch_offset_y =      [0,     0,     0]
+    patch_width =         [10,     10,    5]
+    patch_height =        [10,     10,    5]
+    patch_hspacing =      [2,     4,     1]
+    patch_vspacing =      [2,     4,     1]
+    patch_value =         [-1,   -1,    -1]
+    
+    use_random_placements = [False, False, True]
+    tree_1_probability =    [0.00, 0.00, 0.00]
+    tree_2_probability =    [0.2, 0.7, 0.48]
+    
+    forest = np.zeros((forest_size, forest_size))
+    
+    forest = InitializeForest(forest_size, initial_forest_value[index], use_patches[index], patch_offset_x[index], patch_offset_y[index], patch_width[index], \
+                              patch_height[index], patch_hspacing[index], patch_vspacing[index], patch_value[index], use_random_placements[index],
+                              tree_1_probability[index], tree_2_probability[index])
+        
+    return forest
+
 def InitializeForest(forest_size, initial_forest_value, use_patches, patch_offset_x, patch_offset_y, patch_width, patch_height, \
                      patch_hspacing, patch_vspacing, patch_value, use_random_placements, tree_1_probability, tree_2_probability):
     forest = np.zeros((forest_size, forest_size)) + initial_forest_value
