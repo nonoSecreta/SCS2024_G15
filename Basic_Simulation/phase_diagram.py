@@ -15,37 +15,37 @@ def PhaseDiagram(forest, iterations, infection_time,
                  p_tree_1_conv_growth, p_tree_2_conv_growth, p_infection, p_spread, min_age_agriculture, min_age_immune, relative_growth ):
     
     
-    age_list = np.zeros(forest.shape)
-    infection_time_list = np.zeros(forest.shape)
     wood_outcome = np.zeros((len(infection_time), len(p_spread)))
-            
     
     for i in range(len(infection_time)):
         
         for j in range(len(p_spread)):
+            print("infection_time: ", i, "p_spread", j)
             temp_p_spread = p_spread[j]
             temp_infection_time = infection_time[i]
-                        
+            
+            temp_forest = np.copy(forest)
+            age_list = np.zeros(forest.shape)
+            infection_time_list = np.zeros(forest.shape)
             
             for k in range(iterations):
                    
-                forest, age_list, infection_time_list = TreeDeath(forest, age_list, temp_infection_time, infection_time_list)
+                temp_forest, age_list, infection_time_list = TreeDeath(temp_forest, age_list, temp_infection_time, infection_time_list)
                 
                 # Grow trees at empty areas
-                forest = GrowTrees(forest, p_growth, p_tree_1_growth, p_tree_2_growth)
-                forest = ConvGrowTrees(forest, p_tree_1_conv_growth, p_tree_2_conv_growth)
+                temp_forest = GrowTrees(temp_forest, p_growth, p_tree_1_growth, p_tree_2_growth)
+                temp_forest = ConvGrowTrees(temp_forest, p_tree_1_conv_growth, p_tree_2_conv_growth)
                 
                 # Infect trees at random with given probability
                 
-                forest[(np.random.rand(forest.shape[0], forest.shape[1] ) < p_infection) & (forest == -1)] = 1
+                temp_forest[(np.random.rand(temp_forest.shape[0], temp_forest.shape[1] ) < p_infection) & (temp_forest == -1)] = 1
                 
                 # Spread disease from already infected trees
+                temp_forest = SpreadDisease(temp_forest, age_list, temp_infection_time, temp_p_spread)
                 
-                forest = SpreadDisease(forest, age_list, temp_infection_time, temp_p_spread)
-                              
                 # Update age
-                age_list, infection_time_list = AgeCounter(age_list, infection_time_list, forest)
+                age_list, infection_time_list = AgeCounter(age_list, infection_time_list, temp_forest)
                 
-            wood_outcome[i, j] = HarvestForest(forest, age_list, min_age_agriculture, min_age_immune, relative_growth)
+            wood_outcome[i, j] = HarvestForest(temp_forest, age_list, min_age_agriculture, min_age_immune, relative_growth)
     
     return wood_outcome

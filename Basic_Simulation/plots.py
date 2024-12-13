@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.colors as colors
 
 def plotForestData(forest_data, x_label, y_label, vline_x = None, hline_y = None, line_name = None):
     forest_amount = len(forest_data)
@@ -32,11 +33,17 @@ def plotForestData(forest_data, x_label, y_label, vline_x = None, hline_y = None
     plt.show()
     
     
-def plotPhaseDiagram(phase_diagram, xlabel, ylabel):
-    plt.matshow(phase_diagram)
+def plotPhaseDiagram(phase_diagram, xticks, yticks, xlabel, ylabel, vmin, vmax):
+    deltaXTicks = xticks[1] - xticks[0]
+    deltaYTicks = yticks[1] - yticks[0]
+    plt.imshow(phase_diagram, extent=[xticks[0] - deltaXTicks/2, xticks[-1] + deltaXTicks / 2, yticks[0] - deltaYTicks / 2, yticks[-1] + deltaYTicks / 2], aspect= "auto", origin="lower")
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.colorbar()
+    plt.xticks(xticks)
+    plt.yticks(yticks)
+    plt.show()
+    
 
 def plotForestBatchData(forest_data, x_label, y_label, vline_x = None, hline_y = None, line_name = None, title_name=None):
     
