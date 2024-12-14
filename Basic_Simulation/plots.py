@@ -33,15 +33,17 @@ def plotForestData(forest_data, x_label, y_label, vline_x = None, hline_y = None
     plt.show()
     
     
-def plotPhaseDiagram(phase_diagram, xticks, yticks, xlabel, ylabel, vmin, vmax):
+def plotPhaseDiagram(phase_diagram, title, xticks, yticks, xlabel, ylabel, savePath=None):
     deltaXTicks = xticks[1] - xticks[0]
     deltaYTicks = yticks[1] - yticks[0]
     plt.imshow(phase_diagram, extent=[xticks[0] - deltaXTicks/2, xticks[-1] + deltaXTicks / 2, yticks[0] - deltaYTicks / 2, yticks[-1] + deltaYTicks / 2], aspect= "auto", origin="lower")
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
-    plt.colorbar()
-    plt.xticks(xticks)
-    plt.yticks(yticks)
+    plt.xticks(xticks[[0, len(xticks) // 4, len(xticks) // 2, 3 * len(xticks) // 4, len(xticks) - 1]])
+    plt.yticks(yticks[[0, len(yticks) // 4, len(yticks) // 2, 3 * len(yticks) // 4, len(yticks) - 1]])
+    plt.title(title)
+    if (savePath != None):
+        plt.savefig(savePath, dpi=200)
     plt.show()
     
 
